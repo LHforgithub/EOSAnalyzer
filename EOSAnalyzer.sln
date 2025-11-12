@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36623.8 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EOSAnalyzer", "EOSAnalyzer\EOSAnalyzer.csproj", "{58338FBB-50DD-4225-BD14-BA1BED92D49B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EOSAnalyzer.CodeFixes", "EOSAnalyzer.CodeFixes\EOSAnalyzer.CodeFixes.csproj", "{3271B608-EA48-4FEA-8285-0068C55D15DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EOSAnalyzer.Package", "EOSAnalyzer.Package\EOSAnalyzer.Package.csproj", "{8EC896B1-C0ED-4AF2-89DF-57CACFE00EB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EOSAnalyzer.Vsix", "EOSAnalyzer.Vsix\EOSAnalyzer.Vsix.csproj", "{E5E6B044-1894-4012-A90A-C0077E5DAFC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EOS", "..\EOS\EOS\EOS.csproj", "{FFA6EBC4-37BB-4926-926F-C58BCA3813B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58338FBB-50DD-4225-BD14-BA1BED92D49B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58338FBB-50DD-4225-BD14-BA1BED92D49B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58338FBB-50DD-4225-BD14-BA1BED92D49B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58338FBB-50DD-4225-BD14-BA1BED92D49B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3271B608-EA48-4FEA-8285-0068C55D15DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3271B608-EA48-4FEA-8285-0068C55D15DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3271B608-EA48-4FEA-8285-0068C55D15DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3271B608-EA48-4FEA-8285-0068C55D15DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EC896B1-C0ED-4AF2-89DF-57CACFE00EB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EC896B1-C0ED-4AF2-89DF-57CACFE00EB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EC896B1-C0ED-4AF2-89DF-57CACFE00EB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EC896B1-C0ED-4AF2-89DF-57CACFE00EB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5E6B044-1894-4012-A90A-C0077E5DAFC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5E6B044-1894-4012-A90A-C0077E5DAFC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5E6B044-1894-4012-A90A-C0077E5DAFC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5E6B044-1894-4012-A90A-C0077E5DAFC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFA6EBC4-37BB-4926-926F-C58BCA3813B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFA6EBC4-37BB-4926-926F-C58BCA3813B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFA6EBC4-37BB-4926-926F-C58BCA3813B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFA6EBC4-37BB-4926-926F-C58BCA3813B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FFA6EBC4-37BB-4926-926F-C58BCA3813B1} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4CC68F81-DC24-42B3-872D-BC18C86B2892}
+	EndGlobalSection
+EndGlobal

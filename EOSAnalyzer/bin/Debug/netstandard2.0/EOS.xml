@@ -1,0 +1,724 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EOS</name>
+    </assembly>
+    <members>
+        <member name="T:EOS.Attributes.EventListenerAttribute">
+            <summary>事件特性</summary>
+        </member>
+        <member name="M:EOS.Attributes.EventListenerAttribute.#ctor">
+            <summary>无参方式声明特性。用于在类上注明该<see cref="T:System.Type"/>可以作为接收<see cref="T:EOS.Tiles.EventCode"/>广播的实例。</summary>
+        </member>
+        <member name="M:EOS.Attributes.EventListenerAttribute.#ctor(System.Type)">
+            <summary>
+            用于在方法上注明该<see cref="T:System.Reflection.MethodInfo"/>为对应<see cref="T:EOS.Tiles.EventCode"/>的委托方法。
+            </summary>
+            <param name="type">继承了<see cref="T:EOS.Attributes.EventCodeAttribute"/>特性的类。</param>
+            <remarks>
+            在类上使用等同于无参构造函数<see cref="M:EOS.Attributes.EventListenerAttribute.#ctor"/>
+            </remarks>
+        </member>
+        <member name="T:EOS.Attributes.EventCodeMethodAttribute">
+            <summary>用于继承了<see cref="T:EOS.Attributes.EventCodeAttribute"/>特性的类中的方法，注明该方法为该<see cref="T:EOS.Tiles.EventCode"/>中的<see cref="P:EOS.Tiles.EventCode.Method"/></summary>
+            <remarks>
+            该方法不能是构造函数、属性的Get或Set方法，或者未定义所有类型的泛型方法。
+            </remarks>
+        </member>
+        <member name="T:EOS.Attributes.EventCodeAttribute">
+            <summary>
+            用于类或接口上，注明该类相当于声明了一个<see cref="T:EOS.Tiles.EventCode"/>。
+            <para>该特性不能被继承。</para>
+            </summary>
+            <remarks>
+            该类内部需要同时存在继承了<see cref="T:EOS.Attributes.EventCodeMethodAttribute"/>特性的方法。
+            完全声明后，相当于以该类的<see cref="P:System.Type.AssemblyQualifiedName"/>，
+            和继承了<see cref="T:EOS.Attributes.EventCodeMethodAttribute"/>特性的方法的<see cref="T:System.Reflection.MethodInfo"/>，
+            定义了一个<see cref="T:EOS.Tiles.EventCode"/>类实例。
+            </remarks>
+        </member>
+        <member name="T:EOS.Attributes.NoEventCodeClassAttribute">
+            <summary>注明该类不能作为<see cref="T:EOS.Attributes.EventCodeAttribute"/>类型的继承。</summary>
+            <remarks>用于继承了已继承<see cref="T:EOS.IEventCode"/>接口的类型，但不想该类型作为事件码使用时标记。</remarks>
+        </member>
+        <member name="T:EOS.Attributes.EventPriorityAttribute">
+            <summary> 用于标识事件委托在队列中的优先级。数值越大，优先级越高，越先被调用。</summary>
+        </member>
+        <member name="M:EOS.Attributes.EventPriorityAttribute.#ctor(System.Int32)">
+            <summary> 创建优先等级。默认使用Normal等级。 </summary>
+        </member>
+        <member name="M:EOS.Attributes.EventPriorityAttribute.#ctor(EOS.Attributes.Priority)">
+            <summary> 创建优先等级。默认使用Normal等级。</summary>
+        </member>
+        <member name="T:EOS.Attributes.Priority">
+            <summary>
+            事件优先等级默认枚举
+            </summary>
+        </member>
+        <member name="T:EOS.EOSControler">
+            <summary>事件控制器</summary>
+        </member>
+        <member name="P:EOS.EOSControler.ControlAssembly">
+            <summary>此<see cref="T:EOS.EOSControler"/>隶属的程序集 </summary>
+        </member>
+        <member name="P:EOS.EOSControler.MergeControlers">
+            <summary>同时归属此<see cref="T:EOS.EOSControler"/>控制的<see cref="T:EOS.EOSControler"/>。
+            那些<see cref="T:EOS.EOSControler"/>的<see cref="P:EOS.EOSControler.MergeControlers"/>属性也应该有此<see cref="T:EOS.EOSControler"/>的实例。</summary>
+        </member>
+        <member name="P:EOS.EOSControler.EventDelegatesDic">
+            <summary>事件与对应的事件委托</summary>
+        </member>
+        <member name="P:EOS.EOSControler.ListenerTypeCodeMethods">
+            <summary>已定义事件委托的类以及它们允许添加的事件Code和对应的方法信息。</summary>
+        </member>
+        <member name="P:EOS.EOSControler.NowBroadCastParams">
+            <summary>当前广播的事件的参数集</summary>
+        </member>
+        <member name="M:EOS.EOSControler.AddNewCode(EOS.Tiles.EventCode)">
+            <summary>
+            定义一个新的事件
+            </summary>
+            <param name="eventCode">事件信息</param>
+            <exception cref="T:System.ArgumentException"/>
+        </member>
+        <member name="M:EOS.EOSControler.AddNewCode``1">
+            <inheritdoc cref="M:EOS.EOSControler.AddNewCode(System.Type)"/>
+            <typeparam name="T">泛型必须为继承了<see cref="T:EOS.IEventCode"/>接口的类型，或使用了<see cref="T:EOS.Attributes.EventCodeAttribute"/>特性的类型的类型。</typeparam>
+        </member>
+        <member name="M:EOS.EOSControler.AddNewCode(System.Type)">
+            <inheritdoc cref="M:EOS.EOSControler.AddNewCode(EOS.Tiles.EventCode)"/>
+            <param name="type">必须为使用了<see cref="T:EOS.Attributes.EventCodeAttribute"/>特性的类型。</param>
+            <remarks>
+            使用的类型中，必须同时包含至少一个继承了<see cref="T:EOS.Attributes.EventCodeMethodAttribute"/>特性的方法。
+            当有多个继承的方法时，使用找到的第一个方法作为该事件码的方法信息。
+            </remarks>
+            <exception cref="T:System.ArgumentNullException"/>
+            <exception cref="T:System.InvalidOperationException"/>
+        </member>
+        <member name="M:EOS.EOSControler.AddNewTypeCodeData(System.Type,EOS.Tiles.EventCode,System.Reflection.MethodInfo,System.Int32)">
+            <summary>用于在运行时动态地添加新的事件的接收方法。</summary>
+            <param name="type">必须是继承了<see cref="T:EOS.Attributes.EventListenerAttribute"/>特性的类型。</param>
+            <param name="eventCode">一个运行时动态创建的<see cref="T:EOS.Tiles.EventCode"/>实例。</param>
+            <param name="newMethod">尝试为<paramref name="eventCode"/>添加监听的新方法，必须隶属于<paramref name="type"/>。</param>
+            <param name="priorityNum">该<paramref name="type"/>在此事件中的优先级。</param>
+            <remarks>
+            如果是由<see cref="T:EOS.Attributes.EventCodeAttribute"/>在编译时已定义的事件，不应该使用此方法。
+            <para>参数<paramref name="eventCode"/>应该是运行时创建的，自定义<see cref="P:EOS.Tiles.EventCode.Key"/>值的实例。
+            事件码约定的方法则由输入的<see cref="P:EOS.Tiles.EventCode.Parameters"/>和<see cref="P:EOS.Tiles.EventCode.ReturnType"/>决定。</para>
+            </remarks>
+            <exception cref="T:System.ArgumentNullException"/>
+            <exception cref="T:System.InvalidOperationException"/>
+        </member>
+        <member name="M:EOS.EOSControler.Merge(EOS.EOSControler)">
+            <summary>将另一个<see cref="T:EOS.EOSControler"/>附加到此<see cref="T:EOS.EOSControler"/>。会同时让那个<see cref="T:EOS.EOSControler"/>附加此<see cref="T:EOS.EOSControler"/></summary>
+            <param name="eosControler">要合并的<see cref="T:EOS.EOSControler"/></param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:EOS.EOSControler.Split(EOS.EOSControler)">
+            <summary>
+            将另一个<see cref="T:EOS.EOSControler"/>与此<see cref="T:EOS.EOSControler"/>分离。会同时让那个<see cref="T:EOS.EOSControler"/>分离此<see cref="T:EOS.EOSControler"/>。
+            </summary>
+            <param name="eosControler">要分离的<see cref="T:EOS.EOSControler"/></param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:EOS.EOSControler.Split(System.Reflection.Assembly)">
+            <summary>
+            将另一个<see cref="T:EOS.EOSControler"/>与此<see cref="T:EOS.EOSControler"/>分离。会同时让那个<see cref="T:EOS.EOSControler"/>分离此<see cref="T:EOS.EOSControler"/>。
+            </summary>
+            <param name="controlAssembly">要分离的<see cref="T:EOS.EOSControler"/>所控制的对应的程序集</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:EOS.EOSControler.AddListener(System.Type,System.Object)">
+            <summary>
+            添加事件接收对象实例，或静态类中的方法。
+            对于相同的实例对象，不会重复添加。
+            <para>如果无法添加方法，此方法会抛出异常，可能中断程序。</para>
+            </summary>
+            <param name="type">类型必须是继承了<see cref="T:EOS.Attributes.EventListenerAttribute"/>特性的类型。</param>
+            <param name="instance">对象实例。如果为<see langword="null"/>，则类型必须是静态类型。</param>
+            <exception cref="T:System.ArgumentNullException"/>
+            <exception cref="T:System.InvalidOperationException"/>
+        </member>
+        <member name="M:EOS.EOSControler.AddListener(System.Object)">
+            <inheritdoc cref="M:EOS.EOSControler.AddListener(System.Type,System.Object)"/>
+            <param name="notNullInstance">对象实例，不能为空。</param>
+        </member>
+        <member name="M:EOS.EOSControler.AddListener``1(System.Object,System.String,System.Type[])">
+            <inheritdoc cref="M:EOS.EOSControler.AddListener(System.Type,System.Object)"/>
+            <typeparam name="T">使用或继承了<see cref="T:EOS.Attributes.EventListenerAttribute"/>的类。</typeparam>
+            <param name="notNullInstance">对象实例，不能为空。</param>
+            <param name="methodName">方法名，在对象实例已存在对应于<typeparamref name="T"/>的事件方法（即定义了<see cref="T:EOS.Attributes.EventListenerAttribute"/>特性，参数为<see langword="typeof(T)"/>的方法）的情况下，该项可以为空。</param>
+            <param name="parameterTypes">方法重载的参数类型。</param>
+            <remarks>该方法用于在运行时，将实例的单个方法添加至以使用了<see cref="T:EOS.Attributes.EventCodeAttribute"/>特性的<typeparamref name="T"/>类型作为<see cref="T:EOS.Tiles.EventCode"/>的事件中，而不是一次性将该类型的所有事件方法添加至事件中。
+            <para>即，使用此方法进行动态绑定。</para>
+            在要绑定的对象<paramref name="notNullInstance"/>中，已存在对应于<typeparamref name="T"/>的事件方法的情况下，不填入方法名时，会自动获取该类中对应的事件方法。<paramref name="methodName"/>不为空的情况下，会优先获取该方法名的方法注入事件。
+            </remarks>
+            <exception cref="T:System.Reflection.AmbiguousMatchException" />
+            <exception cref="T:System.ArgumentException" />
+        </member>
+        <member name="M:EOS.EOSControler.RemoveListener(System.Type,System.Object)">
+            <summary>移除事件的接收者，或静态类中的方法。</summary>
+            <param name="type">类型必须是继承了<see cref="T:EOS.Attributes.EventListenerAttribute"/>特性的类型，否则会抛出<see cref="T:System.InvalidOperationException"/>异常。</param>
+            <param name="instance">对象实例。如果为<see langword="null"/>，则类型必须是静态类型。</param>
+            <exception cref="T:System.ArgumentNullException"/>
+            <exception cref="T:System.InvalidOperationException"/>
+        </member>
+        <member name="M:EOS.EOSControler.RemoveListener(System.Object)">
+            <summary>移除事件的接收者。</summary>
+            <param name="notNullInstance">对象实例，不能为空。</param>
+            <exception cref="T:System.ArgumentNullException"/>
+            <exception cref="T:System.InvalidOperationException"/>
+        </member>
+        <member name="M:EOS.EOSControler.RemoveListener``1(System.Object)">
+            <inheritdoc cref="M:EOS.EOSControler.RemoveListener(System.Object)"/>
+            <typeparam name="T">必须是使用或继承了<see cref="T:EOS.Attributes.EventListenerAttribute"/>特性的类型。</typeparam>
+            <remarks>该方法用于在运行时，将实例的单个方法从以使用了<see cref="T:EOS.Attributes.EventCodeAttribute"/>特性的<typeparamref name="T"/>类型作为<see cref="T:EOS.Tiles.EventCode"/>的事件中移除（即动态解绑）。</remarks>
+        </member>
+        <member name="M:EOS.EOSControler.ClearListener(System.String)">
+            <summary>
+            清空对应事件的事件码
+            </summary>
+            <param name="key">要清空事件的事件码的<see cref="P:EOS.Tiles.EventCode.Key"/>值</param>
+        </member>
+        <member name="M:EOS.EOSControler.ClearListener``1">
+            <inheritdoc cref="M:EOS.EOSControler.ClearListener(System.String)"/>
+            <typeparam name="T">必须是继承<see cref="T:EOS.IEventCode"/>接口的类型。</typeparam>
+        </member>
+        <member name="M:EOS.EOSControler.ClearListener(System.Type)">
+            <inheritdoc cref="M:EOS.EOSControler.ClearListener(System.String)"/>
+            <param name="type">必须是继承<see cref="T:EOS.Attributes.EventCodeAttribute"/>特性的类型。</param>
+        </member>
+        <member name="M:EOS.EOSControler.ClearListener(EOS.Tiles.EventCode)">
+            <inheritdoc cref="M:EOS.EOSControler.ClearListener(System.String)"/>
+            <param name="eventCode">要清空事件的事件码。只要<see cref="P:EOS.Tiles.EventCode.Key"/>值不为空即可。</param>
+        </member>
+        <member name="M:EOS.EOSControler.SetListenerLayerProperty(System.Int32,System.Type,System.Object)">
+            <summary>
+            设置事件监听器实例的方法所在层级优先级属性。
+            </summary>
+            <param name="type">类型必须是继承了<see cref="T:EOS.Attributes.EventListenerAttribute"/>特性的类型，否则会抛出<see cref="T:System.InvalidOperationException"/>异常。</param>
+            <param name="instance">对象实例。如果为<see langword="null"/>，则类型必须是静态类型。</param>
+            <param name="layerProperty">要设置的层级优先级属性值。值越小，优先级越小，越后被调用。</param>
+            <exception cref="T:System.ArgumentNullException"/>
+            <exception cref="T:System.InvalidOperationException"/>
+        </member>
+        <member name="M:EOS.EOSControler.SetListenerLayerProperty(System.Object,System.Int32)">
+            <inheritdoc cref="M:EOS.EOSControler.SetListenerLayerProperty(System.Int32,System.Type,System.Object)"/>
+        </member>
+        <member name="M:EOS.EOSControler.BroadCast(System.String,System.Object[])">
+            <summary> 广播事件。 </summary>
+            <param name="key">必须为非空字符串，否则会抛出<see cref="T:System.ArgumentException"/>异常。</param>
+            <param name="values">
+            事件对应要输入的参数。参数<see cref="T:System.Type"/>和位置必须与该<see cref="T:EOS.Tiles.EventCode"/>定义的方法对应。
+            <para>数量可以超出，但不应少于该方法中无默认值的参数数量。</para>
+            <para>超出部分的参数将被忽略，有默认值且<paramref name="values"/>未提供对应值的参数将使用<see cref="T:EOS.Tiles.EventCode"/>定义时的默认值。</para>
+            <para>对使用了<see langword="ref"/>关键字的参数，请在输入<paramref name="values"/>前将<paramref name="values"/>
+            存储为一个您自己的<see langword="object[]"/>数组并保留引用，在广播结束后，
+            该数组对应<see langword="ref"/>关键字参数位置的索引的元素的值将被修改。</para>
+            <para>对使用了<see langword="out"/>关键字的参数，参考<see langword="ref"/>关键字，
+            不同的是<see langword="out"/>关键字参数位置的元素，在输入时可以为<see langword="null"/>，它将在函数中被定义。</para>
+            <para>对使用了<see langword="params"/>关键字的参数，请将<paramref name="values"/>中最后一个参数替换为<see langword="object[]"/>数组。</para>
+            </param>
+            <exception cref="T:System.InvalidOperationException"/>
+            <exception cref="T:System.NullReferenceException"/>
+        </member>
+        <member name="M:EOS.EOSControler.BroadCast(System.Type,System.Object[])">
+            <inheritdoc cref="M:EOS.EOSControler.BroadCast(System.String,System.Object[])"/>
+            <param name="type">必须是继承了<see cref="T:EOS.Attributes.EventCodeAttribute"/>特性的类，否则会抛出<see cref="T:System.ArgumentException"/>异常。</param>
+            <exception cref= "T:System.ArgumentNullException"/>
+            <exception cref= "T:System.ArgumentException"/>
+        </member>
+        <member name="M:EOS.EOSControler.BroadCast``1(System.Object[])">
+            <inheritdoc cref="M:EOS.EOSControler.BroadCast(System.Type,System.Object[])"/>
+            <typeparam name="T">泛型必须是使用或继承了<see cref="T:EOS.Attributes.EventCodeAttribute"/>的类型。</typeparam>
+        </member>
+        <member name="M:EOS.EOSControler.Clear">
+            <summary>
+            清空控制器中所有事件码已添加的接收者。
+            </summary>
+        </member>
+        <member name="P:EOS.EOSControler.IsDestroy">
+            <summary>指示控制器是否已销毁。</summary>
+        </member>
+        <member name="M:EOS.EOSControler.Destroy">
+            <summary>等待广播完毕后销毁控制器。</summary>
+        </member>
+        <member name="M:EOS.EOSControler.GetListenerTypeCodeMethods">
+            <summary>
+            获取所有EventListener对应的许可事件码时使用。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EOS.EOSControler.GetEOSDelegates">
+            <summary>
+            获取事件时，需要用此方法获取，以获得所有合并的控制器。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EOS.EOSControler.GetTypeEOSMethods(System.Type)">
+            <summary>
+            获取类型对应的许可事件码时使用
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:EOS.EOSControler.TryGetEventCode(System.Type)">
+            <inheritdoc cref="M:EOS.EOSControler.TryGetEventCode(System.String)"/>
+            <param name="type">继承了<see cref="T:EOS.Attributes.EventCodeAttribute"/>特性的类型。</param>
+        </member>
+        <member name="M:EOS.EOSControler.TryGetEventCode(System.String)">
+            <summary>返回此<see cref="T:EOS.EOSControler"/>中可以找到的对应的<see cref="T:EOS.Tiles.EventCode"/>实例。包含此<see cref="T:EOS.EOSControler"/>中合并的那些<see cref="T:EOS.EOSControler"/>。</summary>
+            <param name="key"></param>
+            <returns>查询到的<see cref="T:EOS.Tiles.EventCode"/>实例。如果未找到或输入为空，返回<see langword="null"/>。</returns>
+        </member>
+        <member name="T:EOS.EOSManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:EOS.EOSManager.SingleControler">
+            <summary></summary>
+        </member>
+        <member name="P:EOS.EOSManager.AssemblyControlerDic">
+            <summary></summary>
+        </member>
+        <member name="P:EOS.EOSManager.NowBroadCastParams">
+            <summary>
+            当前单例控制器的当前触发事件的事件信息
+            </summary>
+        </member>
+        <member name="M:EOS.EOSManager.MergeToSingleton">
+            <inheritdoc cref="M:EOS.EOSManager.MergeToSingleton(System.Reflection.Assembly)"/>
+            <remarks>无参数时使用调用该函数的域所处程序集。</remarks>
+        </member>
+        <member name="M:EOS.EOSManager.MergeToSingleton(System.Reflection.Assembly)">
+            <summary>
+            将该程序集对应的控制器添加至单例控制器。
+            </summary>
+            <param name="assembly">要添加的程序集</param>
+        </member>
+        <member name="M:EOS.EOSManager.SpliteFromSingleton">
+            <inheritdoc cref="M:EOS.EOSManager.SpliteFromSingleton(System.Reflection.Assembly)"/>
+            <remarks>无参数时使用调用该函数的域所处程序集。</remarks>
+        </member>
+        <member name="M:EOS.EOSManager.SpliteFromSingleton(System.Reflection.Assembly)">
+            <summary>
+            将该程序集对应的控制器从单例控制器中分离。
+            </summary>
+            <param name="assembly">对应的程序集</param>
+        </member>
+        <member name="M:EOS.EOSManager.GetNewControler(System.Reflection.Assembly,System.Collections.Generic.IEnumerable{EOS.EOSControler})">
+            <summary>
+            获取对应程序集的事件控制器。
+            会自动注册该程序集中所有由特性<see cref="T:EOS.Attributes.EventCodeAttribute"/>标注的<see cref="T:EOS.Tiles.EventCode"/>。
+            会自动解析所有由特性<see cref="T:EOS.Attributes.EventListenerAttribute"/>标注的类和方法是否可以作为对应的事件接收者。
+            </summary>
+            <param name="assembly">要解析的程序集</param>
+            <param name="mergeConrolers">要同步合并的程序集</param>
+            <returns>返回解析后的控制器。如果已解析过，返回之前解析的控制器实例。</returns>
+        </member>
+        <member name="M:EOS.EOSManager.GetNewControler(System.Collections.Generic.IEnumerable{EOS.EOSControler})">
+            <inheritdoc cref="M:EOS.EOSManager.GetNewControler(System.Reflection.Assembly,System.Collections.Generic.IEnumerable{EOS.EOSControler})"/>
+        </member>
+        <member name="M:EOS.EOSManager.SearchTypeCodeDataDic(EOS.EOSControler,System.Type)">
+            <summary>
+            加载对应类型的每个声明的事件码对应的事件方法。
+            </summary>
+        </member>
+        <member name="M:EOS.EOSManager.RemoveControler(System.Reflection.Assembly)">
+            <summary>
+            移除已解析的程序集控制器。
+            </summary>
+            <param name="assembly"></param>
+        </member>
+        <member name="M:EOS.EOSManager.RemoveControler">
+            <inheritdoc cref="M:EOS.EOSManager.RemoveControler(System.Reflection.Assembly)"/>
+        </member>
+        <member name="M:EOS.EOSManager.AddListener(System.Type,System.Object)">
+            <inheritdoc cref="M:EOS.EOSControler.AddListener(System.Type,System.Object)" path="member/summary"/>
+            <inheritdoc cref="M:EOS.EOSControler.AddListener(System.Type,System.Object)" path="member/param"/>
+            <remarks>
+            此方法向<see cref="T:EOS.EOSManager"/>中的<see cref="P:EOS.EOSManager.SingleControler"/>添加对象。
+            <para>此静态方法不会直接抛出异常中断，而是将出现的异常记录至<see cref="T:EOS.TempLog"/>中。</para>
+            </remarks>
+        </member>
+        <member name="M:EOS.EOSManager.AddListener(System.Object)">
+            <inheritdoc cref="M:EOS.EOSControler.AddListener(System.Object)" path="member/summary"/>
+            <inheritdoc cref="M:EOS.EOSControler.AddListener(System.Object)" path="member/param"/>
+            <inheritdoc cref="M:EOS.EOSManager.AddListener(System.Type,System.Object)" path="member/remarks"/>
+        </member>
+        <member name="M:EOS.EOSManager.AddListener``1(System.Object,System.String,System.Type[])">
+            <inheritdoc cref="M:EOS.EOSControler.AddListener``1(System.Object,System.String,System.Type[])" path="member/summary"/>
+            <inheritdoc cref="M:EOS.EOSControler.AddListener``1(System.Object,System.String,System.Type[])" path="member/typeparam"/>
+            <inheritdoc cref="M:EOS.EOSControler.AddListener``1(System.Object,System.String,System.Type[])" path="member/param"/>
+            <remarks>
+            <inheritdoc cref="M:EOS.EOSControler.AddListener``1(System.Object,System.String,System.Type[])" path="member/remarks"/>
+            <para><inheritdoc cref="M:EOS.EOSManager.AddListener(System.Type,System.Object)" path="member/remarks"/></para>
+            </remarks>
+        </member>
+        <member name="M:EOS.EOSManager.RemoveListener(System.Type,System.Object)">
+            <inheritdoc cref="M:EOS.EOSControler.RemoveListener(System.Type,System.Object)" path="member/summary"/>
+            <inheritdoc cref="M:EOS.EOSControler.RemoveListener(System.Type,System.Object)" path="member/param"/>
+            <remarks>
+            此方法从<see cref="T:EOS.EOSManager"/>中的<see cref="P:EOS.EOSManager.SingleControler"/>移除对象。
+            <para>此静态方法不会直接抛出异常中断，而是将出现的异常记录至<see cref="T:EOS.TempLog"/>中。</para>
+            </remarks>
+        </member>
+        <member name="M:EOS.EOSManager.RemoveListener(System.Object)">
+            <inheritdoc cref="M:EOS.EOSControler.RemoveListener(System.Object)" path="member/summary"/>
+            <inheritdoc cref="M:EOS.EOSControler.RemoveListener(System.Object)" path="member/param"/>
+            <inheritdoc cref="M:EOS.EOSManager.RemoveListener(System.Type,System.Object)" path="member/remarks"/>
+        </member>
+        <member name="M:EOS.EOSManager.RemoveListener``1(System.Object)">
+            <inheritdoc cref="M:EOS.EOSControler.RemoveListener``1(System.Object)" path="member/summary"/>
+            <inheritdoc cref="M:EOS.EOSControler.RemoveListener``1(System.Object)" path="member/typeparam"/>
+            <inheritdoc cref="M:EOS.EOSControler.RemoveListener``1(System.Object)" path="member/param"/>
+            <remarks>
+            <inheritdoc cref="M:EOS.EOSControler.RemoveListener``1(System.Object)" path="member/remarks"/>
+            <para><inheritdoc cref="M:EOS.EOSManager.RemoveListener(System.Type,System.Object)" path="member/remarks"/></para>
+            </remarks>
+        </member>
+        <member name="M:EOS.EOSManager.ClearListener(System.String)">
+            <inheritdoc cref="M:EOS.EOSControler.ClearListener(System.String)"/>
+            <remarks>此方法从<see cref="T:EOS.EOSManager"/>中的<see cref="P:EOS.EOSManager.SingleControler"/>移除对象。</remarks>
+        </member>
+        <member name="M:EOS.EOSManager.ClearListener``1">
+            <inheritdoc cref="M:EOS.EOSControler.ClearListener``1"/>
+        </member>
+        <member name="M:EOS.EOSManager.ClearListener(System.Type)">
+            <inheritdoc cref="M:EOS.EOSControler.ClearListener(System.Type)"/>
+        </member>
+        <member name="M:EOS.EOSManager.ClearListener(EOS.Tiles.EventCode)">
+            <inheritdoc cref="M:EOS.EOSControler.ClearListener(EOS.Tiles.EventCode)"/>
+        </member>
+        <member name="M:EOS.EOSManager.SetListenerLayerProperty(System.Int32,System.Type,System.Object)">
+            <inheritdoc cref="M:EOS.EOSControler.SetListenerLayerProperty(System.Int32,System.Type,System.Object)"/>
+            <remarks>
+            此方法在<see cref="T:EOS.EOSManager"/>中的<see cref="P:EOS.EOSManager.SingleControler"/>中设置层级优先级。
+            <para>此静态方法不会直接抛出异常中断，而是将出现的异常记录至<see cref="T:EOS.TempLog"/>中。</para>
+            </remarks>
+        </member>
+        <member name="M:EOS.EOSManager.SetListenerLayerProperty(System.Object,System.Int32)">
+            <inheritdoc cref="M:EOS.EOSManager.SetListenerLayerProperty(System.Int32,System.Type,System.Object)"/>
+        </member>
+        <member name="M:EOS.EOSManager.BroadCast(System.String,System.Object[])">
+            <inheritdoc cref="M:EOS.EOSControler.BroadCast(System.String,System.Object[])" path="member/summary"/>
+            <inheritdoc cref="M:EOS.EOSControler.BroadCast(System.String,System.Object[])" path="member/param"/>
+            <remarks>
+            此方法从<see cref="T:EOS.EOSManager"/>中的<see cref="P:EOS.EOSManager.SingleControler"/>广播事件。
+            <para>此静态方法不会直接抛出异常中断，而是将出现的异常记录至<see cref="T:EOS.TempLog"/>中。</para>
+            </remarks>
+        </member>
+        <member name="M:EOS.EOSManager.BroadCast(System.Type,System.Object[])">
+            <inheritdoc cref="M:EOS.EOSControler.BroadCast(System.Type,System.Object[])" path="member/summary"/>
+            <inheritdoc cref="M:EOS.EOSControler.BroadCast(System.Type,System.Object[])" path="member/param"/>
+            <remarks>
+            此方法从<see cref="T:EOS.EOSManager"/>中的<see cref="P:EOS.EOSManager.SingleControler"/>广播事件。
+            <para>此静态方法不会直接抛出异常中断，而是将出现的异常记录至<see cref="T:EOS.TempLog"/>中。</para>
+            </remarks>
+        </member>
+        <member name="M:EOS.EOSManager.BroadCast``1(System.Object[])">
+            <inheritdoc cref="M:EOS.EOSControler.BroadCast``1(System.Object[])" path="member/summary"/>
+            <inheritdoc cref="M:EOS.EOSControler.BroadCast``1(System.Object[])" path="member/param"/>
+            <inheritdoc cref="M:EOS.EOSControler.BroadCast``1(System.Object[])" path="member/typeparam"/>
+            <remarks>
+            此方法从<see cref="T:EOS.EOSManager"/>中的<see cref="P:EOS.EOSManager.SingleControler"/>广播事件。
+            <para>此静态方法不会直接抛出异常中断，而是将出现的异常记录至<see cref="T:EOS.TempLog"/>中。</para>
+            </remarks>
+        </member>
+        <member name="T:EOS.IEventCode">
+            <summary>继承该接口的类等效继承了<see cref="T:EOS.Attributes.EventCodeAttribute"/>特性，并可用作<see cref="M:EOS.EOSControler.AddNewCode``1"/>中的泛型。</summary>
+            <remarks>注意，与单独使用<see cref="T:EOS.Attributes.EventCodeAttribute"/>特性不同，<see cref="T:EOS.Attributes.EventCodeAttribute"/>特性不会被继承，而继承了此接口的类，会自动作为事件码使用，并可能会因为缺少<see cref="T:EOS.Attributes.EventCodeMethodAttribute"/>特性而报错。但是，继承该类型的子类<see langword="不会"/>被作为事件码使用。</remarks>
+        </member>
+        <member name="T:EOS.IEventListener">
+            <summary>继承该接口的类等效继承了<see cref="T:EOS.Attributes.EventListenerAttribute"/>特性，并可用作<see cref="M:EOS.EOSControler.AddNewCode``1"/>中的泛型。</summary>
+        </member>
+        <member name="T:EOS.Tiles.EOSDelegate">
+            <summary>
+            用于EOS事件的委托处理类型。仅用于处理，不应传播至程序集外。
+            </summary>
+        </member>
+        <member name="T:EOS.Tiles.EventCode">
+            <summary>事件码值</summary>
+        </member>
+        <member name="P:EOS.Tiles.EventCode.Key">
+            <summary>事件码。默认值为<see cref="P:EOS.Tiles.EventCode.CodeType"/>的<see cref="P:System.Type.AssemblyQualifiedName"/>。</summary>
+            <remarks>
+            如果使用了<see cref="T:EOS.Attributes.EventCodeAttribute"/>特性定义此类，请保持此项为空值。
+            </remarks>
+        </member>
+        <member name="P:EOS.Tiles.EventCode.CodeType">
+            <summary>定义事件码的类型。</summary>
+            <remarks>
+            该项与<see cref="P:EOS.Tiles.EventCode.Key"/>仅需其中一边为非<see langword="null"/>。
+            </remarks>
+        </member>
+        <member name="P:EOS.Tiles.EventCode.Method">
+            <summary>事件将广播的方法定义。</summary>
+            <remarks>
+            该方法不能是构造函数或者未定义所有类型的泛型方法。
+            <para>该项与<see cref="P:EOS.Tiles.EventCode.Parameters"/>、<see cref="P:EOS.Tiles.EventCode.ReturnType"/>
+            仅需其中一边为非<see langword="null"/>。</para>
+            </remarks>
+        </member>
+        <member name="P:EOS.Tiles.EventCode.Parameters">
+            <summary>事件广播的方法定义的参数集合。列表顺序即为参数顺序。</summary>
+        </member>
+        <member name="P:EOS.Tiles.EventCode.ParametersType">
+            <summary>事件广播的方法定义的参数集合。用于动态创建<see cref="T:EOS.Tiles.EventCode"/>的<see cref="P:EOS.Tiles.EventCode.Method"/></summary>
+        </member>
+        <member name="P:EOS.Tiles.EventCode.ReturnType">
+            <summary>事件广播的方法定义的返回值类型。</summary>
+        </member>
+        <member name="T:EOS.Tiles.EventParams">
+            <summary>事件参数类型</summary>
+        </member>
+        <member name="M:EOS.Tiles.EventParams.#ctor(EOS.EOSControler,EOS.Tiles.EventCode,EOS.Tiles.EventParams,System.UInt32,System.Object[])">
+            <summary></summary>
+        </member>
+        <member name="P:EOS.Tiles.EventParams.Controler">
+            <summary>主控制器</summary>
+        </member>
+        <member name="P:EOS.Tiles.EventParams.Code">
+            <summary>此事件参数用于的事件码</summary>
+        </member>
+        <member name="P:EOS.Tiles.EventParams.Last">
+            <summary>
+            上一个事件参数
+            <para>为<see langword="null"/>如果<see cref="P:EOS.Tiles.EventParams.BroadCastLevel"/>为<see langword="1"/>。</para>
+            </summary>
+        </member>
+        <member name="P:EOS.Tiles.EventParams.BroadCastLevel">
+            <summary>该主控制器的广播层级（总共有多少个EventParams）</summary>
+        </member>
+        <member name="P:EOS.Tiles.EventParams.Values">
+            <summary>该广播事件输入的参数</summary>
+        </member>
+        <member name="M:EOS.Tiles.EventParams.GetParams(System.UInt32)">
+            <summary>
+            获取对应的等级的<see cref="T:EOS.Tiles.EventParams"/>数据。
+            </summary>
+            <param name="level"></param>
+            <returns>返回<see langword="null"/>如果<paramref name="level"/>大于此实例的<see cref="P:EOS.Tiles.EventParams.BroadCastLevel"/>。否则为对应的<see cref="T:EOS.Tiles.EventParams"/>实例。</returns>
+        </member>
+        <member name="T:EOS.Tools.Extentions">
+            <summary>
+            对部分方法的拓展使用
+            </summary>
+        </member>
+        <member name="M:EOS.Tools.Extentions.IsCanUseAsEventCode(System.Type)">
+            <summary>检查类型是否可以被视为定义了一个<see cref="T:EOS.Tiles.EventCode"/>实例。</summary>
+        </member>
+        <member name="M:EOS.Tools.Extentions.IsListener(System.Type)">
+            <summary>检查类型是否可以作为事件的接收者。</summary>
+        </member>
+        <member name="M:EOS.Tools.Extentions.Int32(System.Enum)">
+            <summary>
+            转换enum对象至int
+            </summary>
+        </member>
+        <member name="M:EOS.Tools.Extentions.Merge``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IDictionary{``0,``1},System.Boolean)">
+            <summary>
+            合并字典。当存在重复键时，默认优先使用新的字典的值。
+            </summary>
+            <param name="originalDic">原字典</param>
+            <param name="mergeDic">要合并的字典</param>
+            <param name="originalFirst">优先保留原字典的值。不推荐，效率低下。</param>
+            <returns>返回修改后的字典。</returns>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.InvalidOperationException"></exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException"/>
+        </member>
+        <member name="M:EOS.Tools.Extentions.MergeRange``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IEnumerable{System.Collections.Generic.IDictionary{``0,``1}},System.Boolean)">
+            <inheritdoc cref="M:EOS.Tools.Extentions.Merge``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IDictionary{``0,``1},System.Boolean)"/>
+            <param name="mergeDics">合并的字典集合</param>
+        </member>
+        <member name="M:EOS.Tools.Extentions.ToDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>将<see cref="T:System.Collections.Generic.IDictionary`2"/>转为<see cref="T:System.Collections.Generic.Dictionary`2"/>。</summary>
+        </member>
+        <member name="M:EOS.Tools.Extentions.AddOrUpdata``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
+            <summary>
+            向字典添加值如果其不存在，或者更新字典中的键值。
+            </summary>
+            <param name="originalDic">原字典</param>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <exception cref="T:System.ArgumentException"/>
+            <exception cref="T:System.ArgumentNullException"/>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException"/>
+        </member>
+        <member name="M:EOS.Tools.Extentions.TryAddWithOutMultiple``1(System.Collections.Generic.List{``0},``0)">
+            <summary>
+            尝试向列表添加元素，如果已有相同元素则不添加。
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list">原列表</param>
+            <param name="value">尝试添加的元素</param>
+        </member>
+        <member name="T:EOS.Tools.ReflectionToolsExtensions">
+            <summary>用于查找反射的工具方法合集。以拓展方式使用。</summary>
+        </member>
+        <member name="M:EOS.Tools.ReflectionToolsExtensions.GetSuccessfullyLoadedTypes(System.Reflection.Assembly)">
+            <inheritdoc cref="M:EOS.Tools.ReflectionTools.GetSuccessfullyLoadedTypes(System.Reflection.Assembly)"/>
+        </member>
+        <member name="M:EOS.Tools.ReflectionToolsExtensions.GetDeclaredMethods(System.Type)">
+            <inheritdoc cref="M:EOS.Tools.ReflectionTools.GetDeclaredMethods(System.Type)"/>
+        </member>
+        <member name="M:EOS.Tools.ReflectionToolsExtensions.GetNotGetSetMethods(System.Type)">
+            <inheritdoc cref="M:EOS.Tools.ReflectionTools.GetNotGetSetMethods(System.Type)"/>
+        </member>
+        <member name="M:EOS.Tools.ReflectionToolsExtensions.IsConstructorOrGeneric(System.Reflection.MethodInfo)">
+            <inheritdoc cref="M:EOS.Tools.ReflectionTools.IsConstructorOrGeneric(System.Reflection.MethodInfo)"/>
+        </member>
+        <member name="M:EOS.Tools.ReflectionToolsExtensions.IsParamsAndReturnEquelsWith(System.Reflection.MethodInfo,System.Reflection.MethodInfo)">
+            <inheritdoc cref="M:EOS.Tools.ReflectionTools.IsParamsAndReturnEquelsWith(System.Reflection.MethodInfo,System.Reflection.MethodInfo)"/>
+        </member>
+        <member name="M:EOS.Tools.ReflectionToolsExtensions.GetCustomAttribute``1(System.Reflection.MemberInfo,System.Boolean,System.Boolean)">
+            <inheritdoc cref="M:EOS.Tools.ReflectionTools.GetCustomAttribute``1(System.Reflection.MemberInfo,System.Boolean,System.Boolean)"/>
+        </member>
+        <member name="M:EOS.Tools.ReflectionToolsExtensions.GetNestedTypes(System.Type,System.Boolean)">
+            <inheritdoc cref="M:EOS.Tools.ReflectionTools.GetNestedTypes(System.Type,System.Boolean)"/>
+        </member>
+        <member name="M:EOS.Tools.ReflectionToolsExtensions.IsInheritedBy(System.Reflection.MemberInfo,System.Reflection.MemberInfo)">
+            <inheritdoc cref="M:EOS.Tools.ReflectionTools.IsInheritedBy(System.Reflection.MemberInfo,System.Reflection.MemberInfo)"/>
+        </member>
+        <member name="M:EOS.Tools.ReflectionToolsExtensions.IsMemberType(System.Reflection.MemberInfo,System.Reflection.MemberTypes)">
+            <inheritdoc cref="M:EOS.Tools.ReflectionTools.IsMemberType(System.Reflection.MemberInfo,System.Reflection.MemberTypes)"/>
+        </member>
+        <member name="M:EOS.Tools.ReflectionToolsExtensions.GetUnderlyingType(System.Reflection.MemberInfo)">
+            <inheritdoc cref="M:EOS.Tools.ReflectionTools.GetUnderlyingType(System.Reflection.MemberInfo)"/>
+        </member>
+        <member name="T:EOS.Tools.ReflectionTools">
+            <summary>用于查找反射的工具方法合集。</summary>
+        </member>
+        <member name="F:EOS.Tools.ReflectionTools.All">
+            <summary>所有检索类型</summary>
+        </member>
+        <member name="F:EOS.Tools.ReflectionTools.AllDeclared">
+            <summary>检索不包括继承的成员类型</summary>
+        </member>
+        <member name="F:EOS.Tools.ReflectionTools.AllGetSet">
+            <summary>只检索字段的GetSet方法。</summary>
+        </member>
+        <member name="F:EOS.Tools.ReflectionTools.AllNoGetSet">
+            <summary>检索不包括字段的GetSet方法。</summary>
+        </member>
+        <member name="M:EOS.Tools.ReflectionTools.GetSuccessfullyLoadedTypes(System.Reflection.Assembly)">
+            <summary>获取所有<paramref name="assembly"/>中成功加载的类型</summary>
+            <param name="assembly">目标程序集</param>
+            <returns>一个<see cref="T:System.Type"/>列表。</returns>
+            <remarks>
+            此函数调用 <see cref="M:System.Reflection.Assembly.GetTypes"/>， 当抛出 <see cref="T:System.Reflection.ReflectionTypeLoadException"/>异常时，
+            返回<paramref name="assembly"/>中成功加载的类型
+            （<see cref="P:System.Reflection.ReflectionTypeLoadException.Types"/>，筛选出所有不为<see langword="null"/>的类型。）。
+            </remarks>
+        </member>
+        <member name="M:EOS.Tools.ReflectionTools.GetDeclaredMethods(System.Type)">
+            <summary>获取<paramref name="type"/>中所有声明的方法，不包括继承的方法。</summary>
+            <param name="type">声明了方法的类型。</param>
+            <returns>一个<see cref="T:System.Reflection.MethodInfo"/>集合。如果<paramref name="type"/>为<see langword="null"/>，返回空集合。</returns>
+        </member>
+        <member name="M:EOS.Tools.ReflectionTools.GetNotGetSetMethods(System.Type)">
+            <summary>获取<paramref name="type"/>中所有声明的方法，不包括字段和属性的<see langword="Get"/>或<see langword="Set"/>方法。</summary>
+            <param name="type"></param>
+            <returns>一个<see cref="T:System.Reflection.MethodInfo"/>集合。如果<paramref name="type"/>为<see langword="null"/>，返回空集合。</returns>
+        </member>
+        <member name="M:EOS.Tools.ReflectionTools.IsConstructorOrGeneric(System.Reflection.MethodInfo)">
+            <summary>检查该方法是否未构造函数或存在未定义泛型类型的泛型方法。</summary>
+            <param name="methodInfo"></param>
+            <returns>如果是构造函数或是存在未定义的泛型类型，<see langword="true"/>，否则<see langword="false"/></returns>
+        </member>
+        <member name="M:EOS.Tools.ReflectionTools.IsParamsAndReturnEquelsWith(System.Reflection.MethodInfo,System.Reflection.MethodInfo)">
+            <summary>检查方法的参数类型数量以及返回值是否与另一个方法相同。</summary>
+            <returns>
+            如果不是构造函数或泛型方法，
+            且参数的数量、位置、类型，以及返回的类型完全相同，
+            返回<see langword="true"/>。
+            否则<see langword="false"/>。
+            </returns>
+        </member>
+        <member name="M:EOS.Tools.ReflectionTools.GetCustomAttribute``1(System.Reflection.MemberInfo,System.Boolean,System.Boolean)">
+            <summary>检索应用于指定成员的指定类型的自定义特性。</summary>
+            <typeparam name="T">要匹配的特性的类型</typeparam>
+            <param name="memberInfo">要查找特性的成员</param>
+            <param name="inherit">是否查找继承的类</param>
+            <param name="inheritFromInterfaces">是否查找继承的接口。必须<paramref name="inherit"/>为<see langword="true"/>此项才有意义。</param>
+            <returns>
+            与<typeparamref name="T"/>匹配的特性。如果未找到此类特性，则为<see langword="null"/>。
+            <para>如果<paramref name="inherit"/>与<paramref name="inheritFromInterfaces"/>
+            同时为<see langword="true"/>，那么也会查找定义该<paramref name="memberInfo"/>类型所继承的接口中的
+            与<typeparamref name="T"/>匹配的特性。</para>
+            </returns>
+            <remarks>
+            
+            </remarks>
+        </member>
+        <member name="M:EOS.Tools.ReflectionTools.GetNestedTypes(System.Type,System.Boolean)">
+            <summary>
+            获取指定类型<see cref="T:System.Type"/>的所有嵌套类型。
+            </summary>
+            <param name="type">要检索嵌套类型的类型。</param>
+            <param name="recursion">是否递归获取所有层级的嵌套类型。</param>
+            <returns>嵌套类型数组。如果<paramref name="type"/>为null，则返回空数组。</returns>
+        </member>
+        <member name="M:EOS.Tools.ReflectionTools.IsInheritedBy(System.Reflection.MemberInfo,System.Reflection.MemberInfo)">
+            <summary>
+            判断一个<see cref="T:System.Reflection.MemberInfo"/>是否继承自另一个<see cref="T:System.Reflection.MemberInfo"/>。
+            包括继承的接口成员。
+            </summary>
+            <param name="original">要判断的成员</param>
+            <param name="other">假设是从中继承的成员</param>
+            <returns>
+            如果<paramref name="original"/>是继承自<paramref name="other"/>，
+            或继承自类或接口类型的<paramref name="other"/>中的成员，为<see langword="true"/>。
+            否则为<see langword="false"/>。
+            </returns>
+            <remarks>
+            <b><i><see langword="暂时不支持对构造函数的继承的判断。"/></i></b>
+            </remarks>
+        </member>
+        <member name="M:EOS.Tools.ReflectionTools.IsMemberType(System.Reflection.MemberInfo,System.Reflection.MemberTypes)">
+            <summary>
+            判断某个成员是否为对应的<see cref="T:System.Reflection.MemberTypes"/>枚举成员。
+            </summary>
+            <returns>如果<see cref="P:System.Reflection.MemberInfo.MemberType"/>与<paramref name="memberTypes"/>对应，为<see langword="true"/>。否则为<see langword="false"/>。</returns>
+        </member>
+        <member name="M:EOS.Tools.ReflectionTools.GetUnderlyingType(System.Reflection.MemberInfo)">
+            <summary>返回成员的返回类型。</summary>
+            <returns>
+            如果<paramref name="member"/>是类或接口，返回其自身类型。
+            <para>如果是事件或方法，返回其返回类型。</para>
+            <para>如果是字段或属性，返回其定义类型。</para>
+            </returns>
+        </member>
+        <member name="T:EOS.TempLog">
+            <summary>临时的记录器。</summary>
+        </member>
+        <member name="P:EOS.TempLog.Logger">
+            <summary>一个<see cref="T:System.Text.StringBuilder"/>记录器，用于记录<see cref="N:EOS"/>部分抛出的异常</summary>
+        </member>
+        <member name="P:EOS.TempLog.IsInit">
+            <summary>记录器是否已经初始化</summary>
+        </member>
+        <member name="P:EOS.TempLog.LogTimes">
+            <summary>已包含多少条记录</summary>
+        </member>
+        <member name="P:EOS.TempLog.LastLine">
+            <summary>最后一条记录</summary>
+        </member>
+        <member name="M:EOS.TempLog.Init">
+            <summary>初始化记录器</summary>
+        </member>
+        <member name="M:EOS.TempLog.Log(System.String)">
+            <summary>向<see cref="P:EOS.TempLog.Logger"/>中添加新一行字符串</summary>
+        </member>
+        <member name="M:EOS.TempLog.GetOnce">
+            <summary>获取<see cref="P:EOS.TempLog.Logger"/>中未被获取过的字符串。</summary>
+        </member>
+        <member name="M:EOS.TempLog.GetLast">
+            <summary>获取<see cref="P:EOS.TempLog.Logger"/>中最后被添加的字符串。</summary>
+        </member>
+    </members>
+</doc>

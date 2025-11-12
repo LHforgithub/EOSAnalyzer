@@ -1,0 +1,132 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\2100314\\Desktop\\CSharpStudioAnalyzer\\EOSAnalyzer\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3271B608-EA48-4FEA-8285-0068C55D15DA}|EOSAnalyzer.CodeFixes\\EOSAnalyzer.CodeFixes.csproj|c:\\users\\2100314\\desktop\\csharpstudioanalyzer\\eosanalyzer\\eosanalyzer.codefixes\\codeanalyzerextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3271B608-EA48-4FEA-8285-0068C55D15DA}|EOSAnalyzer.CodeFixes\\EOSAnalyzer.CodeFixes.csproj|solutionrelative:eosanalyzer.codefixes\\codeanalyzerextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58338FBB-50DD-4225-BD14-BA1BED92D49B}|EOSAnalyzer\\EOSAnalyzer.csproj|c:\\users\\2100314\\desktop\\csharpstudioanalyzer\\eosanalyzer\\eosanalyzer\\eosanalyzerlogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58338FBB-50DD-4225-BD14-BA1BED92D49B}|EOSAnalyzer\\EOSAnalyzer.csproj|solutionrelative:eosanalyzer\\eosanalyzerlogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58338FBB-50DD-4225-BD14-BA1BED92D49B}|EOSAnalyzer\\EOSAnalyzer.csproj|c:\\users\\2100314\\desktop\\csharpstudioanalyzer\\eosanalyzer\\eosanalyzer\\eosanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58338FBB-50DD-4225-BD14-BA1BED92D49B}|EOSAnalyzer\\EOSAnalyzer.csproj|solutionrelative:eosanalyzer\\eosanalyzer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3271B608-EA48-4FEA-8285-0068C55D15DA}|EOSAnalyzer.CodeFixes\\EOSAnalyzer.CodeFixes.csproj|c:\\users\\2100314\\desktop\\csharpstudioanalyzer\\eosanalyzer\\eosanalyzer.codefixes\\codefixresources.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "RelativeMoniker": "D:0:0:{3271B608-EA48-4FEA-8285-0068C55D15DA}|EOSAnalyzer.CodeFixes\\EOSAnalyzer.CodeFixes.csproj|solutionrelative:eosanalyzer.codefixes\\codefixresources.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5E6B044-1894-4012-A90A-C0077E5DAFC2}|EOSAnalyzer.Vsix\\EOSAnalyzer.Vsix.csproj|c:\\users\\2100314\\desktop\\csharpstudioanalyzer\\eosanalyzer\\eosanalyzer.vsix\\source.extension.vsixmanifest||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{E5E6B044-1894-4012-A90A-C0077E5DAFC2}|EOSAnalyzer.Vsix\\EOSAnalyzer.Vsix.csproj|solutionrelative:eosanalyzer.vsix\\source.extension.vsixmanifest||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 12,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EOSAnalyzerLogger.cs",
+              "DocumentMoniker": "C:\\Users\\2100314\\Desktop\\CSharpStudioAnalyzer\\EOSAnalyzer\\EOSAnalyzer\\EOSAnalyzerLogger.cs",
+              "RelativeDocumentMoniker": "EOSAnalyzer\\EOSAnalyzerLogger.cs",
+              "ToolTip": "C:\\Users\\2100314\\Desktop\\CSharpStudioAnalyzer\\EOSAnalyzer\\EOSAnalyzer\\EOSAnalyzerLogger.cs",
+              "RelativeToolTip": "EOSAnalyzer\\EOSAnalyzerLogger.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAnwA4AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T05:44:12.054Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "source.extension.vsixmanifest",
+              "DocumentMoniker": "C:\\Users\\2100314\\Desktop\\CSharpStudioAnalyzer\\EOSAnalyzer\\EOSAnalyzer.Vsix\\source.extension.vsixmanifest",
+              "RelativeDocumentMoniker": "EOSAnalyzer.Vsix\\source.extension.vsixmanifest",
+              "ToolTip": "C:\\Users\\2100314\\Desktop\\CSharpStudioAnalyzer\\EOSAnalyzer\\EOSAnalyzer.Vsix\\source.extension.vsixmanifest",
+              "RelativeToolTip": "EOSAnalyzer.Vsix\\source.extension.vsixmanifest",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
+              "WhenOpened": "2025-11-12T01:54:35.332Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CodeFixResources.resx",
+              "DocumentMoniker": "C:\\Users\\2100314\\Desktop\\CSharpStudioAnalyzer\\EOSAnalyzer\\EOSAnalyzer.CodeFixes\\CodeFixResources.resx",
+              "RelativeDocumentMoniker": "EOSAnalyzer.CodeFixes\\CodeFixResources.resx",
+              "ToolTip": "C:\\Users\\2100314\\Desktop\\CSharpStudioAnalyzer\\EOSAnalyzer\\EOSAnalyzer.CodeFixes\\CodeFixResources.resx",
+              "RelativeToolTip": "EOSAnalyzer.CodeFixes\\CodeFixResources.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-11-12T02:11:04.739Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EOSAnalyzer.cs",
+              "DocumentMoniker": "C:\\Users\\2100314\\Desktop\\CSharpStudioAnalyzer\\EOSAnalyzer\\EOSAnalyzer\\EOSAnalyzer.cs",
+              "RelativeDocumentMoniker": "EOSAnalyzer\\EOSAnalyzer.cs",
+              "ToolTip": "C:\\Users\\2100314\\Desktop\\CSharpStudioAnalyzer\\EOSAnalyzer\\EOSAnalyzer\\EOSAnalyzer.cs",
+              "RelativeToolTip": "EOSAnalyzer\\EOSAnalyzer.cs",
+              "ViewState": "AgIAAMgAAAAAAAAAAAAuwNMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T06:03:30.861Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CodeAnalyzerExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\2100314\\Desktop\\CSharpStudioAnalyzer\\EOSAnalyzer\\EOSAnalyzer.CodeFixes\\CodeAnalyzerExtensions.cs",
+              "RelativeDocumentMoniker": "EOSAnalyzer.CodeFixes\\CodeAnalyzerExtensions.cs",
+              "ToolTip": "C:\\Users\\2100314\\Desktop\\CSharpStudioAnalyzer\\EOSAnalyzer\\EOSAnalyzer.CodeFixes\\CodeAnalyzerExtensions.cs",
+              "RelativeToolTip": "EOSAnalyzer.CodeFixes\\CodeAnalyzerExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T06:07:03.549Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
