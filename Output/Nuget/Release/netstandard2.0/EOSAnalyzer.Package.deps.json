@@ -486,8 +486,8 @@
       "EOS/1.0.0": {
         "runtime": {
           "EOS.dll": {
-            "assemblyVersion": "1.3.6.4",
-            "fileVersion": "1.3.6.4"
+            "assemblyVersion": "1.3.6.5",
+            "fileVersion": "1.3.6.5"
           }
         }
       },
